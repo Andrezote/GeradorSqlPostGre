@@ -104,8 +104,14 @@ public class BancoPostGre {
 				tipoColuna = "INTEGER";
 			} else if (tipoParametro.equals(String.class)) {
 				tipoColuna = "VARCHAR(255)";
-			} else if (tipoParametro.equals(Long.class)) {
+			} else if (tipoParametro.equals(long.class)) {
+				tipoColuna = "BIGINT";
+			} else if (tipoParametro.equals(double.class)) {
 				tipoColuna = "DECIMAL";
+			} else if (tipoParametro.equals(float.class)) {
+				tipoColuna = "REAL";
+			} else if (tipoParametro.equals(short.class)) {
+				tipoColuna = "SMALLINT";
 			} else {
 				tipoColuna = "DESCONHECIDO";
 			}
@@ -116,7 +122,6 @@ public class BancoPostGre {
 			sb.append("\n\t").append(nomeColuna).append(" ").append(tipoColuna);
 		}
 		sb.append("\n);");
-
 		return sb.toString();
 	}
 
@@ -185,7 +190,7 @@ public class BancoPostGre {
 	}
 
 	public static void Conectar() {
-		//deve trocar url
+		// deve trocar url
 		String url = "jdbc:postgresql://localhost:5432/TrabalhoJava", user = "postgres", pass = "123456";
 		try {
 			con = DriverManager.getConnection(url, user, pass);
@@ -262,18 +267,20 @@ public class BancoPostGre {
 					} else {
 						nomeColuna = ac.nome();
 					}
+					if (ac.pk()) {
+						continue;
+					}
 				} else {
 					nomeColuna = field.getName().toUpperCase();
 				}
-				if (i > 1) {
+				if (i > 0) {
 					sb.append(", ");
 				}
-				if (i > 0) {
-					if (field.getType().getSimpleName().equals("String")) {
-						sb.append(nomeColuna).append(" = '").append(valores.get(i)).append("'");
-					} else {
-						sb.append(nomeColuna).append(" = ").append(valores.get(i));
-					}
+
+				if (field.getType().getSimpleName().equals("String")) {
+					sb.append(nomeColuna).append(" = '").append(valores.get(i)).append("'");
+				} else {
+					sb.append(nomeColuna).append(" = ").append(valores.get(i));
 				}
 
 			}

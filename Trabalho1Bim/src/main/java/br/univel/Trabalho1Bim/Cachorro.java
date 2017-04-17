@@ -5,7 +5,7 @@ import br.univel.anotacoes.AnotaColuna;
 public class Cachorro {
 
 	private String nome;
-	private Long peso;
+	private double peso;
 	@AnotaColuna(nome = "id", pk = true)
 	private int id;
 	private String cor;
@@ -27,7 +27,7 @@ public class Cachorro {
 		this.nome = nome;
 	}
 
-	public Long getPeso() {
+	public double getPeso() {
 		return peso;
 	}
 

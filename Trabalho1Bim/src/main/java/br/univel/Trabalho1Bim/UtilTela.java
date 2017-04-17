@@ -129,6 +129,7 @@ public class UtilTela {
 
 			public void actionPerformed(ActionEvent arg0) {
 				CriarTable();
+				table_1.setModel(Busca());
 			}
 		});
 		GridBagConstraints gbc_btnNewButton_5 = new GridBagConstraints();
@@ -199,6 +200,7 @@ public class UtilTela {
 			System.out.println(
 					"voce nao criou anotou uma coluna como pk, nao consigo descobrir a referencia pra sua acao");
 		}
+
 		String ps = p.getAtualizaSql(o, id, nColuna, valores);
 		p.Inserir(ps);
 	}
