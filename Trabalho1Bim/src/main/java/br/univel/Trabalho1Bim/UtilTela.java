@@ -37,7 +37,8 @@ public class UtilTela {
 		gbl_contentPane.columnWidths = new int[] { 0, 0, 0, 0, 0, 0 };
 		gbl_contentPane.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0 };
 		gbl_contentPane.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,0.0,0.0,0.0,0.0, Double.MIN_VALUE };
+		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+				Double.MIN_VALUE };
 		contentPane.setLayout(gbl_contentPane);
 
 		inserirLabel(o, contentPane);
@@ -111,6 +112,7 @@ public class UtilTela {
 
 			public void actionPerformed(ActionEvent arg0) {
 				DroparTable();
+				table_1.setModel(Busca());
 			}
 		});
 		GridBagConstraints gbc_btnNewButton_4 = new GridBagConstraints();
@@ -190,7 +192,13 @@ public class UtilTela {
 		for (JTextField textF : textFieldFiel) {
 			valores.add(textF.getText());
 		}
-		String id = textFieldFiel.get(i).getText();
+		String id = null;
+		try {
+			id = textFieldFiel.get(i).getText();
+		} catch (IndexOutOfBoundsException e) {
+			System.out.println(
+					"voce nao criou anotou uma coluna como pk, nao consigo descobrir a referencia pra sua acao");
+		}
 		String ps = p.getAtualizaSql(o, id, nColuna, valores);
 		p.Inserir(ps);
 	}
@@ -202,7 +210,13 @@ public class UtilTela {
 		for (JTextField textF : textFieldFiel) {
 			valores.add(textF.getText());
 		}
-		String id = textFieldFiel.get(0).getText();
+		String id = null;
+		try {
+			id = textFieldFiel.get(i).getText();
+		} catch (IndexOutOfBoundsException e) {
+			System.out.println(
+					"voce nao criou anotou uma coluna como pk, nao consigo descobrir a referencia pra sua acao");
+		}
 		String ps = p.getDeletarSql(o, id, nomeColuna);
 		p.Inserir(ps);
 
@@ -228,21 +242,26 @@ public class UtilTela {
 	private String checarId() {
 		String nomeColuna = null;
 		Field[] f = o.getClass().getDeclaredFields();
+		i = 0;
 		for (Field field : f) {
 			AnotaColuna ac = field.getAnnotation(AnotaColuna.class);
 			if (field.isAnnotationPresent(AnotaColuna.class)) {
-				if (ac.nome().isEmpty() && ac.pk()) {
+				if (ac.nome().isEmpty()) {
 					nomeColuna = field.getName().toUpperCase();
-					break;
 				} else {
 					nomeColuna = ac.nome();
 				}
 			} else {
 				nomeColuna = field.getName().toUpperCase();
 			}
-			if (ac.pk()) {
-				break;
+
+			if (field.isAnnotationPresent(AnotaColuna.class)) {
+				if (ac.pk()) {
+					break;
+				}
 			}
+
+			i += 1;
 		}
 		return nomeColuna;
 
@@ -256,7 +275,11 @@ public class UtilTela {
 			f.setAccessible(true);
 			if (f.isAnnotationPresent(AnotaColuna.class)) {
 				AnotaColuna a = f.getAnnotation(AnotaColuna.class);
-				label = new JLabel(a.nome());
+				if (a.nome().isEmpty()) {
+					label = new JLabel(f.getName());
+				} else {
+					label = new JLabel(a.nome());
+				}
 			} else {
 				label = new JLabel(f.getName());
 			}

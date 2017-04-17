@@ -185,6 +185,7 @@ public class BancoPostGre {
 	}
 
 	public static void Conectar() {
+		//deve trocar url
 		String url = "jdbc:postgresql://localhost:5432/TrabalhoJava", user = "postgres", pass = "123456";
 		try {
 			con = DriverManager.getConnection(url, user, pass);
