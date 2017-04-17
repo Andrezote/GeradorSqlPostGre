@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 public class TabelaGeradoraPrincipal extends JFrame {
 
 	private JPanel contentPane;
+
 	/**
 	 * Launch the application.
 	 */
@@ -17,6 +18,7 @@ public class TabelaGeradoraPrincipal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					// Aqui voce passa o nome da classe que deseja criar a tela
 					TabelaGeradoraPrincipal frame = new TabelaGeradoraPrincipal(new Pessoa());
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -34,7 +36,7 @@ public class TabelaGeradoraPrincipal extends JFrame {
 		setBounds(100, 100, 1200, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		
+
 		UtilTela ut = new UtilTela();
 		this.setContentPane(ut.utilTela(o));
 	}
