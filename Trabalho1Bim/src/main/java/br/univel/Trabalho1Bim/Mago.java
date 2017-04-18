@@ -11,7 +11,7 @@ public class Mago {
 	@AnotaColuna(nome = "classe_mago")
 	private String Classe;
 	@AnotaColuna(nome = "experiencia")
-	private Long xp;
+	private long xp;
 	@AnotaColuna(nome = "lvl")
 	private int level;
 

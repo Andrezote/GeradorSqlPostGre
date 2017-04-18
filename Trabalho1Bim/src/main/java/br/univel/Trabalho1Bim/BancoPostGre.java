@@ -267,9 +267,7 @@ public class BancoPostGre {
 					} else {
 						nomeColuna = ac.nome();
 					}
-					if (ac.pk()) {
-						continue;
-					}
+
 				} else {
 					nomeColuna = field.getName().toUpperCase();
 				}

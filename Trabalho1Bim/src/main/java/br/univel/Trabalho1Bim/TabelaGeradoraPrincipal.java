@@ -18,12 +18,12 @@ public class TabelaGeradoraPrincipal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					
+
 					// Voce deve trocar a url no BancoPostGre no Metodo Conectar
 					// Aqui voce passa o nome da classe que deseja criar a tela
 					// Para as funcoes deletar e atualizar funcionar voce deve
 					// atribuir a PK na coluna da sua classe POJO
-					TabelaGeradoraPrincipal frame = new TabelaGeradoraPrincipal(new Cachorro());
+					TabelaGeradoraPrincipal frame = new TabelaGeradoraPrincipal(new Mago());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
