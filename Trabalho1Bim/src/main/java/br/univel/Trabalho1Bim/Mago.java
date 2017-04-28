@@ -1,5 +1,7 @@
 package br.univel.Trabalho1Bim;
 
+import java.math.BigDecimal;
+
 import br.univel.anotacoes.AnotaColuna;
 import br.univel.anotacoes.AnotaTabela;
 
@@ -11,9 +13,10 @@ public class Mago {
 	@AnotaColuna(nome = "classe_mago")
 	private String Classe;
 	@AnotaColuna(nome = "experiencia")
-	private long xp;
+	private BigDecimal xp;
 	@AnotaColuna(nome = "lvl")
 	private int level;
+	
 
 	public int getId() {
 		return id;
@@ -31,11 +34,11 @@ public class Mago {
 		Classe = classe;
 	}
 
-	public Long getXp() {
+	public BigDecimal getXp() {
 		return xp;
 	}
 
-	public void setXp(Long xp) {
+	public void setXp(BigDecimal xp) {
 		this.xp = xp;
 	}
 

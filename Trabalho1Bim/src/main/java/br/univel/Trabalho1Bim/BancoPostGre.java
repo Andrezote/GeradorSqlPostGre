@@ -1,6 +1,7 @@
 package br.univel.Trabalho1Bim;
 
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -112,6 +113,8 @@ public class BancoPostGre {
 				tipoColuna = "REAL";
 			} else if (tipoParametro.equals(short.class)) {
 				tipoColuna = "SMALLINT";
+			} else if (tipoParametro.equals(BigDecimal.class)) {
+				tipoColuna = "NUMERIC(12,2)";
 			} else {
 				tipoColuna = "DESCONHECIDO";
 			}
